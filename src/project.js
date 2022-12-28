@@ -9,12 +9,12 @@ const displayProject = () => {
     const projectContainer = document.querySelector(".project-container")
     projectContainer.textContent = ""
     todoList.forEach((project, i) => {
-        const projectText = document.createElement("Project");
-        projectText.textContent = project.newProject;
+        const projectBtn = document.createElement("button");
+        projectBtn.textContent = project.newProject;
         const projectDiv = document.createElement("div")
+        projectDiv.className = "project"
         projectDiv.setAttribute("data-project-index", i)
-
-        projectDiv.append(projectText)
+        projectDiv.append(projectBtn)
         projectContainer.append(projectDiv)
     })
 }
