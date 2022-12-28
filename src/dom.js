@@ -1,34 +1,64 @@
+import createTask from "./task";
+
 const inboxBtn = document.querySelector(".inbox-btn")
 const todayBtn = document.querySelector(".today-btn")
 const weekBtn = document.querySelector(".week-btn")
 const projectMain = document.querySelector(".project-main")
+const openModal = document.querySelector(".open-button")
+const modal = document.querySelector(".modal")
+const closeBtn = document.querySelector(".close-btn")
 
-const inboxMain = () => {
+openModal.addEventListener("click", () => {
+    modal.showModal()
+})
+
+closeBtn.addEventListener("click", () => {
+    modal.close()
+})
+
+const inboxHeader = () => {
     const addTask = document.createElement("button")
-    const inboxHeader = document.createElement("h1")
+    const inboxHeading = document.createElement("h1")
 
-    inboxHeader.textContent = "Inbox"
-    inboxHeader.className = "inbox-header"
+    inboxHeading.textContent = "Inbox"
+    inboxHeading.className = "inbox-header"
     addTask.textContent = "Add Task"
     addTask.className = "add-task-btn"
 
-    projectMain.append(inboxHeader, addTask)
+    projectMain.append(inboxHeading, addTask)
+}
+inboxHeader()
+
+const todayHeader = () => {
+    const todayHeading = document.createElement("h1")
+    todayHeading.textContent = "Today"
+    todayHeading.className = "today-header"
+
+    projectMain.append(todayHeading)
 }
 
-const todayMain = () => {
-    const todayHeader = document.createElement("h1")
-    todayHeader.textContent = "Today"
-    todayHeader.className = "today-header"
+const weekHeader = () => {
+    const weekHeading = document.createElement("h1")
+    weekHeading.textContent = "Week"
+    weekHeading.className = "week-header"
 
-    projectMain.append(todayHeader)
+    projectMain.append(weekHeading)
 }
 
-const weekMain = () => {
-    const weekHeader = document.createElement("h1")
-    weekHeader.textContent = "Week"
-    weekHeader.className = "week-header"
+inboxBtn.addEventListener("click", () => {
+    projectMain.textContent = ""
+    inboxHeader()
+    createTask()
+})
 
-    projectMain.append(weekHeader)
-}
+todayBtn.addEventListener("click", () => {
+    projectMain.textContent = ""
+    todayHeader()
+})
 
-export { inboxBtn, todayBtn, weekBtn, projectMain, inboxMain, todayMain, weekMain }
+weekBtn.addEventListener("click", () => {
+    projectMain.textContent = ""
+    weekHeader()
+})
+
+export { }
