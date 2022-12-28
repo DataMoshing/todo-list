@@ -19,19 +19,17 @@
         <button class="week-btn">Week</button>
       </div>
       <h2 class="project-header">Projects</h2>
-      <button class="button open-button">New Project</button>
-      <div class="project-container">
-        <dialog class="modal" id="modal">
-          <form class="dialog">
-            <div class="library-form">
-              <h2 class="new-project-header">New Project</h2>
-              <label for="project">Project</label>
-              <input type="text" id="project-input" required>
-              <button class="close-btn" type="reset">Close</button>
-              <button type="submit" class="submit-btn">Add Project</button>
-            </div>
-          </form>
-        </dialog>
+      <!-- <button class="button open-button">New Project</button> -->
+      <div class="project-container"></div>
+      <form method="dialog">
+        <div class="library-form">
+          <!-- <h2 class="new-project-header">New Project</h2> -->
+          <label for="project"></label>
+          <input type="text" id="project-input" required>
+          <button class="close-btn" type="reset">Clear</button>
+          <button type="submit" class="submit-btn">Add Project</button>
+        </div>
+      </form>
     </nav>
     <div class="project-main">
     </div>
