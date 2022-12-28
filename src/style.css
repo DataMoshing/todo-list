@@ -20,15 +20,10 @@
 
 .todo-projects {}
 
-.project-input {
+#project-input {
   width: 7rem;
 }
 
 .add-task {
   height: 25px;
 }
-
-/* .modal_container {
-  display: none;
-  pointer-events: none;
-} */
