@@ -12,17 +12,28 @@
   </header>
   <main class="todo-main">
     <nav class="todo-left-nav">
+
       <div class="todo-list-btns">
         <button class="inbox-btn">Inbox</button>
         <button class="today-btn">Today</button>
         <button class="week-btn">Week</button>
       </div>
-      <h1 class="todo-projects">Projects</h1>
-      <button class="add-project">Add Project</button>
+      <h2 class="project-header">Projects</h2>
+      <button class="button open-button">New Project</button>
+      <div class="project-container">
+        <dialog class="modal" id="modal">
+          <form class="dialog">
+            <div class="library-form">
+              <h2 class="new-project-header">New Project</h2>
+              <label for="project">Project</label>
+              <input type="text" id="project-input" required>
+              <button class="close-btn" type="reset">Close</button>
+              <button type="submit" class="submit-btn">Add Project</button>
+            </div>
+          </form>
+        </dialog>
     </nav>
-    </div>
     <div class="project-main">
-      <!-- <button class="add-task">Add Task</button> -->
     </div>
     </div>
   </main>
