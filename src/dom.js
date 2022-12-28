@@ -4,17 +4,6 @@ const inboxBtn = document.querySelector(".inbox-btn")
 const todayBtn = document.querySelector(".today-btn")
 const weekBtn = document.querySelector(".week-btn")
 const projectMain = document.querySelector(".project-main")
-const openModal = document.querySelector(".open-button")
-const modal = document.querySelector(".modal")
-const closeBtn = document.querySelector(".close-btn")
-
-openModal.addEventListener("click", () => {
-    modal.showModal()
-})
-
-closeBtn.addEventListener("click", () => {
-    modal.close()
-})
 
 const inboxHeader = () => {
     const addTask = document.createElement("button")
