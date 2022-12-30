@@ -4,34 +4,32 @@ const inboxBtn = document.querySelector(".inbox-btn")
 const todayBtn = document.querySelector(".today-btn")
 const weekBtn = document.querySelector(".week-btn")
 const projectMain = document.querySelector(".project-main")
+const projectHeader = document.querySelector(".project-main-header")
 
 const inboxHeader = () => {
-    const addTask = document.createElement("button")
-    const inboxHeading = document.createElement("h1")
+    const addTaskBtn = document.createElement("button")
 
-    inboxHeading.textContent = "Inbox"
-    inboxHeading.className = "inbox-header"
-    addTask.textContent = "Add Task"
-    addTask.className = "add-task-btn"
+    projectHeader.textContent = "Inbox"
+    addTaskBtn.textContent = "Add Task"
+    addTaskBtn.className = "add-task-btn"
 
-    projectMain.append(inboxHeading, addTask)
+    projectMain.append(projectHeader, addTaskBtn)
 }
+
 inboxHeader()
 
 const todayHeader = () => {
-    const todayHeading = document.createElement("h1")
-    todayHeading.textContent = "Today"
-    todayHeading.className = "today-header"
+    projectHeader.textContent = "Today"
 
-    projectMain.append(todayHeading)
+    projectMain.append(projectHeader)
 }
 
 const weekHeader = () => {
-    const weekHeading = document.createElement("h1")
-    weekHeading.textContent = "Week"
-    weekHeading.className = "week-header"
+    // const weekHeading = document.createElement("h1")
+    projectHeader.textContent = "Week"
+    // weekHeading.className = "week-header"
 
-    projectMain.append(weekHeading)
+    projectMain.append(projectHeader)
 }
 
 inboxBtn.addEventListener("click", () => {
@@ -50,4 +48,4 @@ weekBtn.addEventListener("click", () => {
     weekHeader()
 })
 
-export { }
+export default projectMain 
