@@ -27,3 +27,12 @@
 .add-task {
   height: 25px;
 }
+
+.add-task-btn {
+  width: 75px;
+}
+
+/* .project-main {
+  display: flex;
+  flex-direction: column;
+} */
