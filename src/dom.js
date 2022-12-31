@@ -1,10 +1,13 @@
 import createTask from "./task";
+import ProjectFactory from "./project";
 
 const inboxBtn = document.querySelector(".inbox-btn")
 const todayBtn = document.querySelector(".today-btn")
 const weekBtn = document.querySelector(".week-btn")
 const projectMain = document.querySelector(".project-main")
+const projectForm = document.querySelector("form")
 const projectHeader = document.querySelector(".project-main-header")
+const todoList = []
 
 const inboxHeader = () => {
     const addTaskBtn = document.createElement("button")
@@ -25,10 +28,7 @@ const todayHeader = () => {
 }
 
 const weekHeader = () => {
-    // const weekHeading = document.createElement("h1")
     projectHeader.textContent = "Week"
-    // weekHeading.className = "week-header"
-
     projectMain.append(projectHeader)
 }
 
@@ -48,4 +48,35 @@ weekBtn.addEventListener("click", () => {
     weekHeader()
 })
 
-export default projectMain 
+const displayProject = () => {
+    const projectContainer = document.querySelector(".project-container")
+    projectContainer.textContent = ""
+    todoList.forEach((newProject, i) => {
+        const projectBtn = document.createElement("button");
+        projectBtn.textContent = newProject.project;
+        const projectDiv = document.createElement("div")
+        projectDiv.className = "project-div"
+        projectDiv.setAttribute("data-project-index", i)
+
+        projectDiv.append(projectBtn)
+        projectContainer.append(projectDiv)
+
+        projectBtn.addEventListener("click", () => {
+            projectHeader.textContent = ""
+            projectHeader.textContent = projectBtn.textContent
+        })
+    })
+}
+
+const addProject = (event) => {
+    event.preventDefault()
+    const newProject = document.querySelector("#project-input").value
+    const createProject = ProjectFactory(newProject)
+    todoList.push(createProject)
+    displayProject()
+    console.log({ ...todoList })
+    return createProject
+}
+
+
+projectForm.addEventListener("submit", addProject)
