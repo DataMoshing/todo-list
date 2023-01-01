@@ -1,17 +1,20 @@
-import createTask from "./task";
+// import createTask from "./task";
 import ProjectFactory from "./project";
+import createTask from "./task";
 
+const todoList = []
 const inboxBtn = document.querySelector(".inbox-btn")
 const todayBtn = document.querySelector(".today-btn")
 const weekBtn = document.querySelector(".week-btn")
 const projectMain = document.querySelector(".project-main")
 const projectForm = document.querySelector("form")
 const projectHeader = document.querySelector(".project-main-header")
-const todoList = []
+const addTaskBtn = document.createElement("button")
+const taskForm = document.querySelector("#task-form")
+const span = document.getElementsByClassName("close")[0]
+
 
 const inboxHeader = () => {
-    const addTaskBtn = document.createElement("button")
-
     projectHeader.textContent = "Inbox"
     addTaskBtn.textContent = "Add Task"
     addTaskBtn.className = "add-task-btn"
@@ -23,7 +26,6 @@ inboxHeader()
 
 const todayHeader = () => {
     projectHeader.textContent = "Today"
-
     projectMain.append(projectHeader)
 }
 
@@ -35,7 +37,6 @@ const weekHeader = () => {
 inboxBtn.addEventListener("click", () => {
     projectMain.textContent = ""
     inboxHeader()
-    createTask()
 })
 
 todayBtn.addEventListener("click", () => {
@@ -47,6 +48,20 @@ weekBtn.addEventListener("click", () => {
     projectMain.textContent = ""
     weekHeader()
 })
+
+addTaskBtn.addEventListener("click", () => {
+    taskForm.style.display = "block"
+})
+
+window.onclick = function clickOutside(event) {
+    if (event.target === taskForm) {
+        taskForm.style.display = "none";
+    }
+}
+
+span.onclick = function () {
+    taskForm.style.display = "none";
+}
 
 const displayProject = () => {
     const projectContainer = document.querySelector(".project-container")
@@ -63,7 +78,11 @@ const displayProject = () => {
 
         projectBtn.addEventListener("click", () => {
             projectHeader.textContent = ""
+            projectMain.textContent = ""
+            addTaskBtn.textContent = "Add Task"
             projectHeader.textContent = projectBtn.textContent
+            addTaskBtn.className = "add-task-btn"
+            projectMain.append(projectHeader, addTaskBtn)
         })
     })
 }
@@ -78,5 +97,6 @@ const addProject = (event) => {
     return createProject
 }
 
+createTask()
 
 projectForm.addEventListener("submit", addProject)
