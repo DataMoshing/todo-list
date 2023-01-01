@@ -18,21 +18,44 @@
   width: 5rem;
 }
 
-.todo-projects {}
-
 #project-input {
   width: 7rem;
-}
-
-.add-task {
-  height: 25px;
 }
 
 .add-task-btn {
   width: 75px;
 }
 
-/* .project-main {
+#task-form {
+  display: none;
+  height: 120px;
+  width: 300px;
+}
+
+.form-wrapper {
   display: flex;
-  flex-direction: column;
-} */
+  justify-content: center;
+  margin-top: 10rem;
+  /* align-items: center; */
+  /* background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;  */
+}
+
+.close {
+  display: flex;
+  justify-content: flex-end;
+  color: #aaaaaa;
+  font-weight: bold;
+  font-size: 30px;
+  width: 20px;
+}
+
+.close:hover,
+.close:focus {
+  color: red;
+  text-decoration: none;
+  cursor: pointer;
+}
