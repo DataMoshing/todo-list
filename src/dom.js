@@ -11,7 +11,8 @@ const projectForm = document.querySelector("form")
 const projectHeader = document.querySelector(".project-main-header")
 const addTaskBtn = document.createElement("button")
 const taskForm = document.querySelector("#task-form")
-const span = document.getElementsByClassName("close")[0]
+const closeModal = document.getElementsByClassName("close")[0]
+const formWrapper = document.querySelector(".form-wrapper")
 
 
 const inboxHeader = () => {
@@ -19,7 +20,8 @@ const inboxHeader = () => {
     addTaskBtn.textContent = "Add Task"
     addTaskBtn.className = "add-task-btn"
 
-    projectMain.append(projectHeader, addTaskBtn)
+    formWrapper.append(projectMain)
+    projectMain.append(projectHeader, addTaskBtn, taskForm)
 }
 
 inboxHeader()
@@ -53,15 +55,9 @@ addTaskBtn.addEventListener("click", () => {
     taskForm.style.display = "block"
 })
 
-window.onclick = function clickOutside(event) {
-    if (event.target === taskForm) {
-        taskForm.style.display = "none";
-    }
-}
-
-span.onclick = function () {
-    taskForm.style.display = "none";
-}
+closeModal.addEventListener("click", () => {
+    taskForm.style.display = "none"
+})
 
 const displayProject = () => {
     const projectContainer = document.querySelector(".project-container")
