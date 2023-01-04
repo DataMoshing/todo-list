@@ -1,8 +1,8 @@
-// import createTask from "./task";
+import TaskFactory from "./task";
 import ProjectFactory from "./project";
-import createTask from "./task";
 
-const todoList = []
+const todoProjects = []
+const todoTasks = []
 const inboxBtn = document.querySelector(".inbox-btn")
 const todayBtn = document.querySelector(".today-btn")
 const weekBtn = document.querySelector(".week-btn")
@@ -13,6 +13,72 @@ const addTaskBtn = document.createElement("button")
 const taskForm = document.querySelector("#task-form")
 const closeModal = document.getElementsByClassName("close")[0]
 const formWrapper = document.querySelector(".form-wrapper")
+const dialogWrapper = document.querySelector(".dialog-wrapper")
+const taskList = document.querySelector(".task-list")
+// const projectSubmit = document.querySelector(".project-submit-btn")
+
+
+
+const displayProject = () => {
+    const projectContainer = document.querySelector(".project-container")
+    projectContainer.textContent = ""
+    todoProjects.forEach((newProject, i) => {
+        const projectBtn = document.createElement("button");
+        projectBtn.textContent = newProject.project
+        const projectDiv = document.createElement("div")
+        projectDiv.className = "project-div"
+        projectDiv.setAttribute("data-project-index", i)
+
+        projectDiv.append(projectBtn)
+        projectContainer.append(projectDiv)
+        dialogWrapper.append(projectContainer)
+
+        projectBtn.addEventListener("click", () => {
+            projectHeader.textContent = ""
+            projectMain.textContent = ""
+            addTaskBtn.textContent = "Add Task"
+            projectHeader.textContent = projectBtn.textContent
+            addTaskBtn.className = "add-task-btn"
+            projectMain.append(projectHeader, addTaskBtn)
+        })
+    })
+}
+
+const displayTask = () => {
+    taskList.textContent = ""
+    todoTasks.forEach((newForm, i) => {
+        const taskBtn = document.createElement("button")
+        taskBtn.textContent = taskForm.textContent
+        const taskDiv = document.createElement("div")
+        taskDiv.className = "task-div"
+        taskDiv.setAttribute("data-task-index", i)
+
+        taskDiv.append(taskBtn)
+        taskList.append(taskDiv)
+        projectMain.append(taskList)
+    })
+
+}
+
+const addProject = (event) => {
+    event.preventDefault()
+    const newProject = document.querySelector("#project-input").value
+    const createProject = ProjectFactory(newProject)
+    todoProjects.push(createProject)
+    displayProject()
+    console.log({ ...todoProjects })
+    return createProject
+}
+
+const addTask = (event) => {
+    event.preventDefault()
+    const newForm = document.querySelector("#task-form").value
+    const createTask = TaskFactory(newForm)
+    todoTasks.push(createTask)
+    displayTask()
+    console.log({ ...todoTasks })
+    return createTask
+}
 
 
 const inboxHeader = () => {
@@ -20,8 +86,9 @@ const inboxHeader = () => {
     addTaskBtn.textContent = "Add Task"
     addTaskBtn.className = "add-task-btn"
 
+    projectMain.append(projectHeader, taskForm, addTaskBtn)
     formWrapper.append(projectMain)
-    projectMain.append(projectHeader, addTaskBtn, taskForm)
+    displayTask()
 }
 
 inboxHeader()
@@ -36,10 +103,6 @@ const weekHeader = () => {
     projectMain.append(projectHeader)
 }
 
-inboxBtn.addEventListener("click", () => {
-    projectMain.textContent = ""
-    inboxHeader()
-})
 
 todayBtn.addEventListener("click", () => {
     projectMain.textContent = ""
@@ -59,40 +122,11 @@ closeModal.addEventListener("click", () => {
     taskForm.style.display = "none"
 })
 
-const displayProject = () => {
-    const projectContainer = document.querySelector(".project-container")
-    projectContainer.textContent = ""
-    todoList.forEach((newProject, i) => {
-        const projectBtn = document.createElement("button");
-        projectBtn.textContent = newProject.project;
-        const projectDiv = document.createElement("div")
-        projectDiv.className = "project-div"
-        projectDiv.setAttribute("data-project-index", i)
+inboxBtn.addEventListener("click", () => {
+    inboxHeader()
+})
 
-        projectDiv.append(projectBtn)
-        projectContainer.append(projectDiv)
-
-        projectBtn.addEventListener("click", () => {
-            projectHeader.textContent = ""
-            projectMain.textContent = ""
-            addTaskBtn.textContent = "Add Task"
-            projectHeader.textContent = projectBtn.textContent
-            addTaskBtn.className = "add-task-btn"
-            projectMain.append(projectHeader, addTaskBtn)
-        })
-    })
-}
-
-const addProject = (event) => {
-    event.preventDefault()
-    const newProject = document.querySelector("#project-input").value
-    const createProject = ProjectFactory(newProject)
-    todoList.push(createProject)
-    displayProject()
-    console.log({ ...todoList })
-    return createProject
-}
-
-createTask()
-
-projectForm.addEventListener("submit", addProject)
+document.querySelector("#project").addEventListener("click", addProject)
+document.querySelector("#task").addEventListener("click", addTask)
+// projectForm.addEventListener("submit", addProject)
+// taskForm.addEventListener("submit", addTask)
