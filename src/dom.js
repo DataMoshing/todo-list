@@ -7,7 +7,7 @@ const inboxBtn = document.querySelector(".inbox-btn")
 const todayBtn = document.querySelector(".today-btn")
 const weekBtn = document.querySelector(".week-btn")
 const projectMain = document.querySelector(".project-main")
-const projectForm = document.querySelector("form")
+// const projectForm = document.querySelector("form")
 const projectHeader = document.querySelector(".project-main-header")
 const addTaskBtn = document.createElement("button")
 const taskForm = document.querySelector("#task-form")
@@ -15,9 +15,30 @@ const closeModal = document.getElementsByClassName("close")[0]
 const formWrapper = document.querySelector(".form-wrapper")
 const dialogWrapper = document.querySelector(".dialog-wrapper")
 const taskList = document.querySelector(".task-list")
-// const projectSubmit = document.querySelector(".project-submit-btn")
 
+const displayTask = () => {
+    taskList.textContent = ""
+    todoTasks.forEach((i) => {
+        const taskBtn = document.createElement("button")
+        taskBtn.textContent = taskForm.textContent
+        const taskDiv = document.createElement("div")
+        taskDiv.className = "task-div"
+        taskDiv.setAttribute("data-task-index", i)
 
+        taskDiv.append(taskBtn)
+        taskList.append(taskDiv)
+        projectMain.append(taskList)
+    })
+}
+const addTask = (event) => {
+    event.preventDefault()
+    const newForm = document.querySelector("#task-form").value
+    const createTask = TaskFactory(newForm)
+    todoTasks.push(createTask)
+    displayTask()
+    console.log({ ...todoTasks })
+    return createTask
+}
 
 const displayProject = () => {
     const projectContainer = document.querySelector(".project-container")
@@ -32,7 +53,6 @@ const displayProject = () => {
         projectDiv.append(projectBtn)
         projectContainer.append(projectDiv)
         dialogWrapper.append(projectContainer)
-
         projectBtn.addEventListener("click", () => {
             projectHeader.textContent = ""
             projectMain.textContent = ""
@@ -44,42 +64,19 @@ const displayProject = () => {
     })
 }
 
-const displayTask = () => {
-    taskList.textContent = ""
-    todoTasks.forEach((newForm, i) => {
-        const taskBtn = document.createElement("button")
-        taskBtn.textContent = taskForm.textContent
-        const taskDiv = document.createElement("div")
-        taskDiv.className = "task-div"
-        taskDiv.setAttribute("data-task-index", i)
-
-        taskDiv.append(taskBtn)
-        taskList.append(taskDiv)
-        projectMain.append(taskList)
-    })
-
-}
-
 const addProject = (event) => {
     event.preventDefault()
     const newProject = document.querySelector("#project-input").value
+    if (newProject === "") {
+        alert("Project name can't be empty")
+        return
+    }
     const createProject = ProjectFactory(newProject)
     todoProjects.push(createProject)
     displayProject()
     console.log({ ...todoProjects })
-    return createProject
+    // return createProject
 }
-
-const addTask = (event) => {
-    event.preventDefault()
-    const newForm = document.querySelector("#task-form").value
-    const createTask = TaskFactory(newForm)
-    todoTasks.push(createTask)
-    displayTask()
-    console.log({ ...todoTasks })
-    return createTask
-}
-
 
 const inboxHeader = () => {
     projectHeader.textContent = "Inbox"
