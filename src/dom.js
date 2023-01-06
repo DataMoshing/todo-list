@@ -59,7 +59,8 @@ const displayProject = () => {
             addTaskBtn.textContent = "Add Task"
             projectHeader.textContent = projectBtn.textContent
             addTaskBtn.className = "add-task-btn"
-            projectMain.append(projectHeader, addTaskBtn)
+            projectMain.append(projectHeader, taskForm, addTaskBtn)
+            displayTask()
         })
     })
 }
