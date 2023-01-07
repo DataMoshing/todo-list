@@ -12,7 +12,6 @@
   </header>
   <main class="todo-main">
     <nav class="todo-left-nav">
-
       <div class="todo-list-btns">
         <button class="inbox-btn">Inbox</button>
         <button class="today-btn">Today</button>
@@ -20,16 +19,21 @@
       </div>
       <h2 class="project-header">Projects</h2>
       <div class="project-container"></div>
-      <form method="dialog">
-        <div class="project-form">
-          <label for="project"></label>
-          <input type="text" id="project-input" required>
-          <button class="close-btn" type="reset">Clear</button>
-          <button type="submit" class="submit-btn">Add Project</button>
-        </div>
-      </form>
+      <div class="dialog-wrapper">
+        <form method="dialog">
+          <div class="project-form">
+            <label for="project"></label>
+            <input type="text" id="project-input" required>
+            <div class="button">
+              <button type="reset">Clear</button>
+              <input type="button" id="project" value="Add Project"></input>
+            </div>
+          </div>
+        </form>
+      </div>
     </nav>
     <div class="project-main">
+      <div class="task-list"></div>
       <h1 class="project-main-header">
       </h1>
     </div>
@@ -56,6 +60,9 @@
           <label for="normal-priority">Normal</label>
           <input type="radio" id="high-priority" name="priority" />
           <label for="high">High</label>
+        </div>
+        <div class="button">
+          <input type="submit" required id="task" value="Add Task"></input>
         </div>
       </form>
     </div>
