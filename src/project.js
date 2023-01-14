@@ -1,3 +1,5 @@
+import { taskFactory } from "./task"
+
 // Project Manager object
 const PM = {
     // Empty projects array
@@ -6,27 +8,42 @@ const PM = {
     addProject(project) {
         this.projects.push(project)
     },
+    deleteProject(project) {
+        const index = this.projects.indexOf(project)
+        if (index !== -1) {
+            this.projects.splice(index, 1)
+            return true
+        }
+        return false
+    }
 }
-// Test logic
-// PM.addProject("Meep")
-// PM.addProject("Beep")
 
-const projectFactory = (project) => ({
-    project,
-    tasks: []
+const projectFactory = (title) => ({
+    title,
+    tasks: [],
+    addTask(task) {
+        this.tasks.push(task)
+    }
 })
 
-const project1 = projectFactory("Inbox");
-const project2 = projectFactory("Study");
+// Test logic
+const project1 = projectFactory("Clean")
+// const project2 = projectFactory("Study")
+const project3 = projectFactory("Water Plants")
+const task1 = taskFactory("Clean kitchen", "Wash dishes", "1/14/2023", "Medium")
+const task2 = taskFactory("Study objects", "Read through MDN docs", "1/16/2023", "High")
 
 PM.addProject(project1)
-PM.addProject(project2);
+project1.addTask(task1)
+project1.addTask(task2)
+PM.addProject(project3)
+
 const createProject = (title) => {
     const project = projectFactory(title)
-    PM.addProject(project)
+    return project
 }
 
 console.log(PM.projects)
 
 
-export { PM, createProject }
+export { createProject, PM }
