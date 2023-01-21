@@ -5,9 +5,11 @@ const PM = {
     projects: [],
     id: 0,
     addProject(project) {
+        // Set project parameters id to current id 
+        // eslint-disable-next-line no-param-reassign
         project.id = this.id
-        // this.projects = this.projects.map((item, index) => ({ ...item, id: index + 1 }))
         this.projects.push(project)
+        // Push then increment id
         this.id++
     },
     deleteProject(project) {
@@ -18,10 +20,22 @@ const PM = {
         }
         return false
     },
-    updateProject() {
-
+    updateProject(projectId, newTitle) {
+        // Iterate through projects array
+        for (let i = 0; i < this.projects.length; i++) {
+            // Check current iteration project id to project id
+            if (this.projects[i].id === projectId) {
+                // If title hasnt changed return false
+                if (this.projects[i].title === newTitle) return false
+                // Else return project title with new title
+                this.projects[i].title = newTitle
+                return true
+            }
+        }
+        return false
     },
 }
+
 
 const projectFactory = (title) => ({
     title,
@@ -52,6 +66,8 @@ PM.addProject(project2)
 PM.addProject(project3)
 project1.addTask(task1)
 project1.addTask(task2)
+PM.updateProject(1, "New title")
+
 const createProject = (title) => {
     const project = projectFactory(title)
     return project
