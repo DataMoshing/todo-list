@@ -1,12 +1,14 @@
+/* eslint-disable no-plusplus */
 import { taskFactory } from "./task"
-
 // Project Manager object
 const PM = {
-    // Empty projects array
     projects: [],
-    // Project method pushing to projects array
+    id: 0,
     addProject(project) {
+        project.id = this.id
+        // this.projects = this.projects.map((item, index) => ({ ...item, id: index + 1 }))
         this.projects.push(project)
+        this.id++
     },
     deleteProject(project) {
         const projectIndex = this.projects.indexOf(project)
@@ -18,7 +20,7 @@ const PM = {
     },
     updateProject() {
 
-    }
+    },
 }
 
 const projectFactory = (title) => ({
@@ -34,30 +36,28 @@ const projectFactory = (title) => ({
             return true
         }
         return false
-    }
+    },
 })
 
 // Test logic
 const project1 = projectFactory("Clean")
-// const project2 = projectFactory("Study")
-// const project3 = projectFactory("Water Plants")
-const task1 = taskFactory("Clean kitchen", "Wash dishes", "1/14/2023", "Medium")
-const task2 = taskFactory("Study objects", "Read through MDN docs", "1/16/2023", "High")
-const task3 = taskFactory("Workout", "Yoga/weightlifting", "1/16/2023", "High")
+const project2 = projectFactory("Workout")
+const project3 = projectFactory("Workout")
+
+const task1 = taskFactory("Clean kitchen", "Wash dishes", "1/19/2023", "Medium")
+const task2 = taskFactory("Clean kitchen", "Wash dishes", "1/19/2023", "Medium")
 
 PM.addProject(project1)
+PM.addProject(project2)
+PM.addProject(project3)
 project1.addTask(task1)
 project1.addTask(task2)
-project1.addTask(task3)
-project1.deleteTask(task2)
-PM.updateProject(project1)
-// PM.addProject(project3)
-
 const createProject = (title) => {
     const project = projectFactory(title)
     return project
 }
 
+// console.log(project1.tasks[0].dueDate)
 console.log(PM.projects)
 
 
