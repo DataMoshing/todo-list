@@ -10,7 +10,13 @@
   },
   "rules": {
     "no-console": "off",
-    "quotes": ["error", "double"]
+    "quotes": [
+      "error",
+      "double"
+    ]
   },
-  "extends": ["airbnb-base", "prettier"]
+  "extends": [
+    "airbnb-base",
+    "prettier"
+  ]
 }
