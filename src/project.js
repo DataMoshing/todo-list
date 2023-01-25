@@ -47,7 +47,12 @@ const projectFactory = (title) => ({
         }
         return false
     },
+    updateTask(taskId, data) {
+        Object.assign(this.tasks.find(el => el.id === taskId), data)
+    }
 })
+
+
 
 // Test logic
 const project1 = projectFactory("Clean")
@@ -59,19 +64,26 @@ const task1 = taskFactory("Clean kitchen", "Wash dishes", "1/19/2023", "Medium")
 const task2 = taskFactory("Clean kitchen", "Wash dishes", "1/19/2023", "Medium")
 
 PM.addProject(project1)
+// console.log(PM.projects[0])
 PM.addProject(project2)
 PM.addProject(project3)
+
+
 project1.addTask(task1)
 project1.addTask(task2)
+PM.updateProject(project1.id, "Updated title")
+project1.updateTask(task1.id, { title: "Updated title", priority: "0000" })
 
-// PM.updateProject("8cfbe571-406e-438a-a082-65e71d945b76", "Updated Title")
+
+console.log(PM.projects)
+// console.log(PM.projects[0])
+// console.log(PM.projects[0].tasks)
 
 // const createProject = (title) => {
 //     const project = projectFactory(title)
 //     return project
 // }
 
-console.log(PM.projects)
+// console.log(PM.projects)
 
 
-export default PM 
