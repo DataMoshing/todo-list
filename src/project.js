@@ -1,4 +1,3 @@
-/* eslint-disable no-plusplus */
 import { v4 as uuidv4 } from "uuid";
 import { taskFactory } from "./task"
 
@@ -18,7 +17,7 @@ const PM = {
     },
     updateProject(projectId, newTitle) {
         // Iterate through projects array
-        for (let i = 0; i < this.projects.length; i++) {
+        for (let i = 0; i < this.projects.length; i += 1) {
             // Check current iteration project id to project id
             if (this.projects[i].id === projectId) {
                 // If title hasnt changed return false
@@ -51,8 +50,6 @@ const projectFactory = (title) => ({
         Object.assign(this.tasks.find(el => el.id === taskId), data)
     }
 })
-
-
 
 // Test logic
 const project1 = projectFactory("Clean")
