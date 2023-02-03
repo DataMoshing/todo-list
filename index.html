@@ -7,7 +7,37 @@
 </head>
 
 <body>
-
+  <header>
+    <h1>Todo List</h1>
+  </header>
+  <main class="main">
+    <div class="main-container">
+      <form class="project-form">
+        <div class="project-input">
+          <label for="project">Project</label>
+          <input type="text" name="project" id="project">
+        </div>
+        <input type="submit" value="Add project" name="add-project">
+        <div class="project-list"></div>
+      </form>
+      <form class="task-form">
+        <div class="task-input">
+          <label for="title">Title:</label>
+          <input type="text" name="title" id="title">
+          <label for="due-date">Due date:</label>
+          <input type="date" name="due-date" id="due-date">
+          <label for="priority" id="priority"></label>
+          <select id="task-priority">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+          <input type="submit" value="Add task" name="add-task">
+          <div class="task-list"></div>
+        </div>
+      </form>
+    </div>
+  </main>
 </body>
 
 </html>
