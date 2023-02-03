@@ -1,0 +1,17 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+
+.main-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+.task-div {
+    display: flex;
+    flex-direction: column;
+}

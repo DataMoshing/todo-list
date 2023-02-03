@@ -1,11 +1,11 @@
 import { v4 as uuidv4 } from "uuid";
-import { taskFactory } from "./task"
-
+// import { taskFactory } from "./task";
 // Project Manager object
 const PM = {
     projects: [],
     addProject(project) {
         this.projects.push(project)
+        // console.log(this.projects)
     },
     deleteProject(project) {
         const projectIndex = this.projects.findIndex(project)
@@ -52,35 +52,18 @@ const projectFactory = (title) => ({
 })
 
 // Test logic
-const project1 = projectFactory("Clean")
-const project2 = projectFactory("Workout")
-const project3 = projectFactory("Workout")
+// const project1 = projectFactory("Clean")
 
+// const task1 = taskFactory("Clean kitchen", "2/1/2023", "Medium")
 
-const task1 = taskFactory("Clean kitchen", "Wash dishes", "1/19/2023", "Medium")
-const task2 = taskFactory("Clean kitchen", "Wash dishes", "1/19/2023", "Medium")
+// PM.addProject(project1)
 
-PM.addProject(project1)
-// console.log(PM.projects[0])
-PM.addProject(project2)
-PM.addProject(project3)
+// project1.addTask(task1)
 
-
-project1.addTask(task1)
-project1.addTask(task2)
-PM.updateProject(project1.id, "Updated title")
-project1.updateTask(task1.id, { title: "Updated title", priority: "0000" })
-
+// console.log(project1.tasks)
+// PM.updateProject(project1.id, "Updated title")
+// project1.updateTask(task1.id, { title: "Updated title", priority: "0000" })
 
 console.log(PM.projects)
-// console.log(PM.projects[0])
-// console.log(PM.projects[0].tasks)
 
-// const createProject = (title) => {
-//     const project = projectFactory(title)
-//     return project
-// }
-
-// console.log(PM.projects)
-
-
+export { projectFactory, PM }
