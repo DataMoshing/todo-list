@@ -33,7 +33,7 @@ const displayProject = () => {
 
         projectContainer.append(projectDiv)
         projectList.append(projectContainer)
-        project.tasks.forEach((task) => {
+        project.tasks.forEach(() => {
             // const createTask = taskFactory(task.title, task.Duedate, task.priority)
             // project.addTask(createTask)
             // displayTask()
@@ -44,15 +44,15 @@ const displayProject = () => {
 
 const addProject = (event) => {
     event.preventDefault()
-    // taskList.textContent = ""
-    // const taskTitle = document.getElementById("title").value
-    // const taskDuedate = document.getElementById("due-date").value
-    // const taskPriority = document.getElementById("task-priority").value
+    taskList.textContent = ""
+    const taskTitle = document.getElementById("title").value
+    const taskDuedate = document.getElementById("due-date").value
+    const taskPriority = document.getElementById("task-priority").value
     const projectInput = document.getElementById("project").value
-    // const createTask = taskFactory(taskTitle, taskDuedate, taskPriority)
+    const createTask = taskFactory(taskTitle, taskDuedate, taskPriority)
     const newProject = projectFactory(projectInput)
     PM.addProject(newProject)
-    // newProject.addTask(createTask)
+    newProject.addTask(createTask)
     displayProject()
 }
 
