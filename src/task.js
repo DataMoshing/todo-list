@@ -7,5 +7,4 @@ const createTask = (title, dueDate, priority) => {
     return task
 }
 
-
-export { taskFactory, createTask }
+export default createTask

@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-// import { taskFactory } from "./task";
+import taskFactory from "./task";
 // Project Manager object
 const PM = {
     projects: [],
@@ -8,7 +8,7 @@ const PM = {
         // console.log(this.projects)
     },
     deleteProject(project) {
-        const projectIndex = this.projects.findIndex(project)
+        const projectIndex = this.projects.indexOf(project)
         if (projectIndex !== -1) {
             this.projects.splice(projectIndex, 1)
             return true
@@ -39,7 +39,7 @@ const projectFactory = (title) => ({
         this.tasks.push(task)
     },
     deleteTask(task) {
-        const taskIndex = this.tasks.findIndex(task)
+        const taskIndex = this.tasks.indexOf(task)
         if (taskIndex !== -1) {
             this.tasks.splice(taskIndex, 1)
             return true
@@ -56,13 +56,15 @@ const projectFactory = (title) => ({
 
 // const task1 = taskFactory("Clean kitchen", "2/1/2023", "Medium")
 
+// console.log(task1)
 // PM.addProject(project1)
 
 // project1.addTask(task1)
 
-// console.log(project1.tasks)
 // PM.updateProject(project1.id, "Updated title")
-// project1.updateTask(task1.id, { title: "Updated title", priority: "0000" })
+// project1.updateTask(task1.id, { title: "Updated title" })
+// PM.deleteProject(project1)
+// console.log(project1.tasks)
 
 console.log(PM.projects)
 
