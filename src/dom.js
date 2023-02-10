@@ -5,9 +5,9 @@ const projectList = document.querySelector(".project-list")
 const projectForm = document.querySelector(".project-form")
 const projectValue = projectForm.querySelector("input[name='add-project']")
 const taskList = document.querySelector(".task-list")
-const taskForm = document.querySelector(".task-form")
-const taskValue = taskForm.querySelector("input[name='add-task']")
-// const taskDiv = document.createElement("div")
+// const taskForm = document.querySelector(".task-form")
+// const taskValue = taskForm.querySelector("input[name='add-task']")
+const addTaskBtn = document.querySelector(".add-task-btn")
 
 const createTask = () => {
     const taskTitle = document.getElementById("task-title").value
@@ -29,11 +29,9 @@ const createProject = () => {
     return newProject
 }
 
-const updateDisplay = (event) => {
+const updateUI = (event) => {
     event.preventDefault()
-    const newTask = createTask()
     const newProject = createProject()
-    newProject.addTask(newTask);
     PM.addProject(newProject)
     projectList.textContent = ""
     PM.projects.forEach((project) => {
@@ -56,7 +54,16 @@ const updateDisplay = (event) => {
             PM.deleteProject(project)
             projectDiv.append(deleteBtn)
         })
+        addTaskBtn.addEventListener("click", (e) => {
+            e.preventDefault()
+            const newTask = createTask()
+            project.addTask(newTask)
+            const taskDiv = document.createElement("div")
+            // taskDiv.textContent = newTask.title
+            taskList.append(taskDiv)
+        })
     })
 }
-projectValue.addEventListener("click", updateDisplay);
-taskValue.addEventListener("click", createTask);
+
+projectValue.addEventListener("click", updateUI);
+// taskValue.addEventListener("click", createTask);
