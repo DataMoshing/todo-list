@@ -76,14 +76,13 @@ const updateUI = (event) => {
         })
         deleteBtn.addEventListener("click", (e) => {
             e.preventDefault()
-            // projectDiv.remove()
+            projectDiv.remove()
             addTaskBtn.remove()
             PM.deleteProject(project)
             const projectTasks = document.querySelectorAll(".task-div");
-            const projectContainers = document.querySelectorAll(".task-container")
+            // const projectContainers = document.querySelectorAll(".project-div")
             for (let i = 0; i < projectTasks.length; i += 1) {
                 if (projectTasks[i].textContent.includes(project.title)) {
-                    projectContainers[i].remove()
                     projectTasks[i].remove();
                 }
             }
