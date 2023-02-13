@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-// import taskFactory from "./task";
+
 // Project Manager object
 const PM = {
     projects: [],
@@ -50,22 +50,5 @@ const projectFactory = (title) => ({
         Object.assign(this.tasks.find(el => el.id === taskId), data)
     }
 })
-
-// Test logic
-// const project1 = projectFactory("Clean")
-
-// const task1 = taskFactory("Clean kitchen", "2/1/2023", "Medium")
-
-// console.log(task1)
-// PM.addProject(project1)
-
-// project1.addTask(task1)
-
-// PM.updateProject(project1.id, "Updated title")
-// project1.updateTask(task1.id, { title: "Updated title" })
-// PM.deleteProject(project1)
-// console.log(project1.tasks)
-
-console.log(PM.projects)
 
 export { projectFactory, PM }
