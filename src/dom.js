@@ -5,22 +5,13 @@ const projectList = document.querySelector(".project-list")
 const projectForm = document.querySelector(".project-form")
 const projectValue = projectForm.querySelector("input[name='add-project']")
 const taskList = document.createElement("div")
+taskList.classList = "task-list"
 const main = document.querySelector(".main-container")
-
-// const taskList = document.querySelector(".task-list")
-// const taskForm = document.querySelector(".task-form")
-// const taskValue = taskForm.querySelector("input[name='add-task']")
-// const addTaskBtn = document.querySelector(".add-task-btn")
 
 const createTask = () => {
     const taskTitle = document.getElementById("task-title").value
     const taskDuedate = document.getElementById("due-date").value
     const taskPriority = document.getElementById("task-priority").value
-    // const taskDiv = document.createElement("div")
-    // const taskContainer = document.createElement("div")
-    // taskContainer.append(taskDiv)
-    // taskList.append(taskContainer)
-    // taskDiv.append(taskTitle, taskDuedate, taskPriority)
     const newTask = taskFactory(taskTitle,
         taskDuedate, taskPriority)
     return newTask
@@ -32,15 +23,18 @@ const createProject = () => {
     return newProject
 }
 
-const updateUI = (event) => {
-    event.preventDefault()
+const updateUI = (e) => {
+    e.preventDefault()
     const newProject = createProject()
     PM.addProject(newProject)
     projectList.textContent = ""
     PM.projects.forEach((project) => {
         const projectDiv = document.createElement("div")
-        const deleteBtn = document.createElement("button")
-        deleteBtn.textContent = "Delete"
+        const addTaskBtn = document.createElement("button")
+        addTaskBtn.className = "add-project-task"
+        const deleteProjectBtn = document.createElement("button")
+        deleteProjectBtn.textContent = "Delete"
+        deleteProjectBtn.className = "delete-project"
 
         projectDiv.textContent = `Project: ${project.title}`
         projectDiv.setAttribute("project-index", project.id)
@@ -48,44 +42,61 @@ const updateUI = (event) => {
         const projectContainer = document.createElement("div")
         projectDiv.className = "project-div"
 
-        projectDiv.append(deleteBtn)
+        projectDiv.append(deleteProjectBtn)
         projectContainer.append(projectDiv)
         projectContainer.classList = "project-container"
         projectList.append(projectContainer)
 
-        const addTaskBtn = document.createElement("button")
         addTaskBtn.textContent = "Add Task"
-        projectContainer.append(addTaskBtn)
+        projectContainer.append(addTaskBtn, deleteProjectBtn)
 
-        addTaskBtn.addEventListener("click", (e) => {
-            e.preventDefault()
+
+        addTaskBtn.addEventListener("click", (event) => {
+            event.preventDefault()
+            // Set variable to createTask function (taskFactory)
             const newTask = createTask()
+            // Add new task to current project
             project.addTask(newTask)
+            // Create div to display logic
             const taskDiv = document.createElement("div")
             taskDiv.classList = "task-div"
             taskDiv.textContent = `Project: ${project.title} 
             Task: ${newTask.title} Date: ${newTask.dueDate} Priority: ${newTask.priority}`
             taskDiv.setAttribute("task-div", newTask.id)
 
+            const deleteTaskBtn = document.createElement("button")
+            deleteTaskBtn.textContent = "Delete Task"
+            taskDiv.append(deleteTaskBtn)
+
             const taskContainer = document.createElement("div")
             taskContainer.classList = "task-container"
+            // taskDiv.append(deleteTaskBtn)
             taskContainer.append(taskDiv)
             taskList.append(taskDiv)
 
             main.append(taskList)
+
+            deleteTaskBtn.addEventListener("click", () => {
+                project.deleteTask(newTask)
+                taskDiv.remove()
+            })
         })
-        deleteBtn.addEventListener("click", (e) => {
-            e.preventDefault()
+        deleteProjectBtn.addEventListener("click", (event) => {
+            event.preventDefault()
+            PM.deleteProject(project)
             projectDiv.remove()
             addTaskBtn.remove()
-            PM.deleteProject(project)
+            deleteProjectBtn.remove()
+            // Select all task divs
             const projectTasks = document.querySelectorAll(".task-div");
-            // const projectContainers = document.querySelectorAll(".project-div")
+            // Loop through all task divs in current project and remove
             for (let i = 0; i < projectTasks.length; i += 1) {
+                // If current project task includes project title remove project tasks
                 if (projectTasks[i].textContent.includes(project.title)) {
                     projectTasks[i].remove();
                 }
             }
+
         })
     })
 }
