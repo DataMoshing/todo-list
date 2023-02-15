@@ -71,6 +71,9 @@ const updateUI = (e) => {
                 const taskTitle = document.createElement("task")
                 const taskDate = document.createElement("due-date")
                 const taskPriority = document.createElement("priority")
+                const deleteTaskBtn = document.createElement("button")
+                deleteTaskBtn.textContent = "Delete Task"
+                deleteTaskBtn.classList = "delete-task-btn"
 
                 projectTask.textContent = `Project: ${project.title}`
                 projectTask.classList = "project-task"
@@ -78,17 +81,14 @@ const updateUI = (e) => {
                 taskTitle.textContent =
                     `Task: ${newTask.title}`
 
-                taskDate.textContent = `Due-date: ${newTask.dueDate}`
+                taskDate.textContent = (`Due-date: ${newTask.dueDate}`)
                 taskDate.classList = "task-due-date"
 
                 taskPriority.textContent = `Priority: ${newTask.priority}`
                 taskPriority.classList = "task-priority"
 
-                const deleteTaskBtn = document.createElement("button")
-                deleteTaskBtn.textContent = "Delete Task"
-                deleteTaskBtn.classList = "delete-task-btn"
 
-                taskDiv.append(projectTask, taskTitle, taskDate, taskPriority, deleteTaskBtn)
+                taskDiv.append(deleteTaskBtn, projectTask, taskTitle, taskDate, taskPriority)
 
                 const taskContainer = document.createElement("div")
                 taskContainer.classList = "task-container"
@@ -97,25 +97,51 @@ const updateUI = (e) => {
                 // Edit current task 
                 const newForm = document.createElement("form")
                 const newInput = document.createElement("input")
+                const newTaskLabel = document.createElement("Label")
+                const editTaskBtn = document.createElement("button")
+                const editPriorityBtn = document.createElement("button")
+                const newPriority = document.createElement("select")
 
-                const editTask = document.createElement("button")
-                editTask.textContent = "Edit task"
+                editTaskBtn.textContent = "Edit task"
+                editPriorityBtn.textContent = "Edit Priority"
                 newInput.id = "new-task-input"
-                // const newInputValue = document.querySelector("new-task-input").value
-                // console.log(newInputValue)
 
                 taskTitle.addEventListener("click", () => {
                     newInput.type = "text"
                     newInput.name = "new-task-input"
-                    newForm.append(newInput)
-                    taskDiv.append(newForm, editTask)
+                    newTaskLabel.setAttribute("for", "updated-task")
+                    newTaskLabel.textContent = "Update task: "
+                    newTaskLabel.append(newInput)
+                    newForm.append(newTaskLabel)
+                    taskDiv.append(newForm, editTaskBtn)
                 })
 
-                editTask.addEventListener("click", () => {
+                editTaskBtn.addEventListener("click", () => {
                     project.updateTask(newTask.id, { title: `${newInput.value}` })
-                    // console.log(test)
                     taskTitle.textContent = `Task: ${newInput.value}`
+                    newTaskLabel.remove()
+                    newInput.remove()
+                    editTaskBtn.remove()
                 })
+
+                taskPriority.addEventListener("click", () => {
+                    const newPriorityLow = document.createElement("option");
+                    const newPriorityMedium = document.createElement("option");
+                    const newPriorityHigh = document.createElement("option");
+                    newPriorityLow.text = "Low"
+                    newPriorityMedium.text = "Medium"
+                    newPriorityHigh.text = "High"
+                    newPriority.textContent = "New Priority: "
+                    newPriority.append(newPriorityLow, newPriorityMedium, newPriorityHigh)
+                    taskDiv.append(newPriority, editPriorityBtn)
+                })
+                editPriorityBtn.addEventListener("click", () => {
+                    project.updateTask(newTask.id, { priority: `${newPriority.value}` })
+                    taskPriority.textContent = `Priority: ${newPriority.value}`
+                    newPriority.remove()
+                    editPriorityBtn.remove()
+                })
+
                 // Remove single task
                 deleteTaskBtn.addEventListener("click", () => {
                     project.deleteTask(newTask)
