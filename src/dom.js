@@ -18,7 +18,6 @@ const createTask = () => {
     return newTask
 }
 
-
 const createProject = () => {
     const projectInput = document.getElementById("project").value
     const newProject = projectFactory(projectInput)
@@ -34,6 +33,7 @@ const updateUI = (e) => {
         PM.addProject(newProject)
         projectList.textContent = ""
         PM.projects.forEach((project) => {
+            // Create projects
             const projectDiv = document.createElement("h3")
             const addTaskBtn = document.createElement("button")
             addTaskBtn.className = "add-project-task"
@@ -94,19 +94,36 @@ const updateUI = (e) => {
                 taskContainer.classList = "task-container"
                 taskContainer.append(taskDiv)
                 taskList.append(taskDiv)
+                // Edit current task 
+                const newForm = document.createElement("form")
+                const newInput = document.createElement("input")
+
+                const editTask = document.createElement("button")
+                editTask.textContent = "Edit task"
+                newInput.id = "new-task-input"
+                // const newInputValue = document.querySelector("new-task-input").value
+                // console.log(newInputValue)
 
                 taskTitle.addEventListener("click", () => {
-                    const newInput = document.createElement("input")
                     newInput.type = "text"
-                    taskTitle.append(newInput)
+                    newInput.name = "new-task-input"
+                    newForm.append(newInput)
+                    taskDiv.append(newForm, editTask)
                 })
 
+                editTask.addEventListener("click", () => {
+                    project.updateTask(newTask.id, { title: `${newInput.value}` })
+                    // console.log(test)
+                    taskTitle.textContent = `Task: ${newInput.value}`
+                })
+                // Remove single task
                 deleteTaskBtn.addEventListener("click", () => {
                     project.deleteTask(newTask)
                     taskDiv.remove()
                 })
                 main.append(taskList)
             })
+            // Delete project + tasks
             deleteProjectBtn.addEventListener("click", (event) => {
                 event.preventDefault()
                 PM.deleteProject(project)
@@ -126,5 +143,5 @@ const updateUI = (e) => {
         })
     }
 }
+
 projectValue.addEventListener("click", updateUI);
-// taskValue.addEventListener("click", createTask);
