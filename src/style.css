@@ -1,17 +1,160 @@
-/* * {
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight&display=swap');
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     text-decoration: none;
     list-style: none;
-} */
-
-.main-container {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
 }
 
+body {
+    font-family: 'Inter Tight', sans-serif;
+    display: flex;
+    font-size: 18px;
+}
+
+h1 {
+    font-weight: 100;
+}
+
+header {
+    width: 150px;
+}
+
+.add-project-task,
+.delete-project {
+    width: 150px;
+    height: 20px;
+}
+
+.project-input,
+.project-div {
+    display: flex;
+    align-items: center;
+    width: 300px;
+    font-weight: 100;
+}
+
+.project-input {
+    margin-bottom: .5rem;
+}
+
+.task-input {
+    display: flex;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 1rem;
+}
+
+.project-container {
+    display: flex;
+    align-items: center;
+    width: 450px;
+}
+
+.project-container>.add-project-task {
+    margin-right: .5rem;
+}
+
+.project-list {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+}
+
+.project-form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+}
+
+.task-form {
+    display: flex;
+    flex-direction: column;
+}
+
+input[name="project"],
+input[name="title"],
+input[type="submit"] {
+    width: 150px;
+    margin-left: .5rem;
+}
+
+.task-list,
 .task-div {
     display: flex;
     flex-direction: column;
+}
+
+.task-title:hover,
+.task-due-date:hover,
+.task-priority:hover {
+    background-color: #c4c4c48e;
+    cursor: pointer;
+}
+
+.task-div {
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 2px 2px;
+    border-radius: 10px;
+    display: flex;
+    margin-top: .5rem;
+    padding: 0 0 .5rem .5rem;
+}
+
+.task-div>.delete-task-btn {
+    width: 75px;
+    display: flex;
+    align-self: flex-end;
+}
+
+input[type="submit"],
+.add-project-task,
+.delete-project {
+    background-color: transparent;
+    border: 2px solid #1A1A1A;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: normal;
+    min-height: 25px;
+    min-width: 100px;
+    outline: none;
+    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    user-select: none;
+    will-change: transform;
+}
+
+.add-project-task:hover,
+input[type="submit"]:hover {
+    color: #000000;
+    background-color: #80e011;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+}
+
+.delete-project:hover {
+    color: #000000;
+    background-color: #f14410cb;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+}
+
+input[type="submit"]:active,
+.add-project-task:active {
+    box-shadow: none;
+    transform: translateY(0);
+}
+
+.edit-task-btn,
+.edit-priority-btn,
+.edit-due-date-btn {
+    width: 90px;
+}
+
+.new-due-date,
+.new-priority {
+    width: 125px;
 }
