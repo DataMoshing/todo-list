@@ -51,4 +51,9 @@ const projectFactory = (title) => ({
     }
 })
 
+// const project1 = projectFactory("Clean")
+
+// PM.addProject(project1)
+// console.log(PM.projects[0])
+
 export { projectFactory, PM }

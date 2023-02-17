@@ -4,7 +4,6 @@ import taskFactory from "./task"
 const projectList = document.querySelector(".project-list")
 const projectForm = document.querySelector(".project-form")
 const projectValue = projectForm.querySelector("input[name='add-project']")
-// const inputValue = document.querySelector("task-title")
 const main = document.querySelector(".main-container")
 const taskList = document.createElement("div")
 taskList.classList = "task-list"
@@ -26,6 +25,9 @@ const createProject = () => {
 
 const updateUI = (e) => {
     e.preventDefault()
+    localStorage.setItem("PM.projects", JSON.stringify(PM.projects));
+    const retrievedObject = localStorage.getItem("PM.projects");
+    console.log("retrievedObject: ", JSON.parse(retrievedObject));
     const newProject = createProject()
     /* Iterate through each project in array and check if current project title is equal to new projects title if not create new project */
     const projectExists = PM.projects.some((project) => project.title === newProject.title)

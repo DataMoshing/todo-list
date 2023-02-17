@@ -9,9 +9,14 @@
 }
 
 body {
-    font-family: 'Inter Tight', sans-serif;
     display: flex;
+    font-family: 'Inter Tight', sans-serif;
     font-size: 18px;
+}
+
+main {
+    display: flex;
+    min-width: 500px;
 }
 
 h1 {
@@ -20,6 +25,7 @@ h1 {
 
 header {
     width: 150px;
+    display: flex;
 }
 
 .add-project-task,
@@ -40,14 +46,17 @@ header {
     margin-bottom: .5rem;
 }
 
-.task-input {
-    display: flex;
+.task-input>label {
+    /* display: flex;
+    flex-wrap: wrap; */
+    min-width: 500px
 }
 
 .main-container {
     display: flex;
     flex-direction: column;
     margin-left: 1rem;
+    min-width: 500px
 }
 
 .project-container {
@@ -106,9 +115,17 @@ input[type="submit"] {
 }
 
 .task-div>.delete-task-btn {
-    width: 75px;
-    display: flex;
-    align-self: flex-end;
+    width: 30px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 60px;
+    border: solid 1.5px rgb(0 0 0 / 0.7);
+    border: none;
+    margin-left: auto;
+}
+
+.task-div>.delete-task-btn:hover {
+    background-color: #f14410cb;
 }
 
 input[type="submit"],
