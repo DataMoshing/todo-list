@@ -34,25 +34,23 @@ const updateUI = (e) => {
         projectList.textContent = ""
         PM.projects.forEach((project) => {
             // Create projects
+            const projectContainer = document.createElement("div")
             const projectDiv = document.createElement("h3")
             const addTaskBtn = document.createElement("button")
-            addTaskBtn.className = "add-project-task"
             const deleteProjectBtn = document.createElement("button")
-            deleteProjectBtn.textContent = "Delete"
-            deleteProjectBtn.className = "delete-project"
 
             projectDiv.textContent = `Project: ${project.title}`
             projectDiv.setAttribute("project-index", project.id)
 
-            const projectContainer = document.createElement("div")
             projectDiv.className = "project-div"
-
+            projectContainer.className = "project-container"
+            addTaskBtn.className = "add-project-task"
+            addTaskBtn.textContent = "Add Task"
+            deleteProjectBtn.textContent = "Delete"
+            deleteProjectBtn.className = "delete-project"
             projectDiv.append(deleteProjectBtn)
             projectContainer.append(projectDiv)
-            projectContainer.classList = "project-container"
             projectList.append(projectContainer)
-
-            addTaskBtn.textContent = "Add Task"
             projectContainer.append(addTaskBtn, deleteProjectBtn)
 
             console.log(PM.projects)
@@ -65,47 +63,53 @@ const updateUI = (e) => {
                 project.addTask(newTask)
                 // Create elements to display logic
                 const taskDiv = document.createElement("div")
-                taskDiv.setAttribute("task-div", newTask.id)
                 const projectTask = document.createElement("project")
-                taskDiv.classList = "task-div"
                 const taskTitle = document.createElement("task")
                 const taskDate = document.createElement("due-date")
                 const taskPriority = document.createElement("priority")
                 const deleteTaskBtn = document.createElement("button")
-                deleteTaskBtn.textContent = "Delete Task"
-                deleteTaskBtn.classList = "delete-task-btn"
+                deleteTaskBtn.textContent = "✕"
 
                 projectTask.textContent = `Project: ${project.title}`
-                projectTask.classList = "project-task"
-                taskTitle.classList = "task-title"
-                taskTitle.textContent =
-                    `Task: ${newTask.title}`
-
-                taskDate.textContent = (`Due-date: ${newTask.dueDate}`)
-                taskDate.classList = "task-due-date"
-
+                taskTitle.textContent = `Task: ${newTask.title}`
+                taskDate.textContent = `Due-date: ${newTask.dueDate}`
                 taskPriority.textContent = `Priority: ${newTask.priority}`
-                taskPriority.classList = "task-priority"
 
+                projectTask.className = "project-task"
+                taskDiv.className = "task-div"
+                taskDiv.setAttribute("task-div", newTask.id)
+                taskTitle.className = "task-title"
+                taskDate.className = "task-due-date"
+                taskPriority.className = "task-priority"
+                deleteTaskBtn.className = "delete-task-btn"
 
                 taskDiv.append(deleteTaskBtn, projectTask, taskTitle, taskDate, taskPriority)
 
                 const taskContainer = document.createElement("div")
                 taskContainer.classList = "task-container"
                 taskContainer.append(taskDiv)
+
                 taskList.append(taskDiv)
-                // Edit current task 
+
+                // Edit task elements
                 const newForm = document.createElement("form")
                 const newInput = document.createElement("input")
-                const newTaskLabel = document.createElement("Label")
+                const newTaskLabel = document.createElement("label")
                 const editTaskBtn = document.createElement("button")
                 const editPriorityBtn = document.createElement("button")
+                const editDueDate = document.createElement("button")
                 const newPriority = document.createElement("select")
+                const newDueDate = document.createElement("input")
 
                 editTaskBtn.textContent = "Edit task"
+                editTaskBtn.className = "edit-task-btn"
                 editPriorityBtn.textContent = "Edit Priority"
+                editDueDate.textContent = "Edit Due date"
+                editDueDate.className = "edit-due-date-btn"
+                editPriorityBtn.className = "edit-priority-btn"
                 newInput.id = "new-task-input"
 
+                // Edit current task 
                 taskTitle.addEventListener("click", () => {
                     newInput.type = "text"
                     newInput.name = "new-task-input"
@@ -132,9 +136,11 @@ const updateUI = (e) => {
                     newPriorityMedium.text = "Medium"
                     newPriorityHigh.text = "High"
                     newPriority.textContent = "New Priority: "
+                    newPriority.className = "new-priority"
                     newPriority.append(newPriorityLow, newPriorityMedium, newPriorityHigh)
                     taskDiv.append(newPriority, editPriorityBtn)
                 })
+
                 editPriorityBtn.addEventListener("click", () => {
                     project.updateTask(newTask.id, { priority: `${newPriority.value}` })
                     taskPriority.textContent = `Priority: ${newPriority.value}`
@@ -142,6 +148,18 @@ const updateUI = (e) => {
                     editPriorityBtn.remove()
                 })
 
+                taskDate.addEventListener("click", () => {
+                    newDueDate.setAttribute("type", "date")
+                    newDueDate.className = "new-due-date"
+                    taskDiv.append(newDueDate, editDueDate)
+                })
+
+                editDueDate.addEventListener("click", () => {
+                    project.updateTask(newTask.id, { dueDate: `${newDueDate.value}` })
+                    taskDate.textContent = `Due-date ${newDueDate.value}`
+                    newDueDate.remove()
+                    editDueDate.remove()
+                })
                 // Remove single task
                 deleteTaskBtn.addEventListener("click", () => {
                     project.deleteTask(newTask)
