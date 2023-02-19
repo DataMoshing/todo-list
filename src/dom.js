@@ -21,13 +21,10 @@ const createProject = () => {
     const projectInput = document.getElementById("project").value
     const newProject = projectFactory(projectInput)
     return newProject
-}
 
+}
 const updateUI = (e) => {
     e.preventDefault()
-    localStorage.setItem("PM.projects", JSON.stringify(PM.projects));
-    const retrievedObject = localStorage.getItem("PM.projects");
-    console.log("retrievedObject: ", JSON.parse(retrievedObject));
     const newProject = createProject()
     /* Iterate through each project in array and check if current project title is equal to new projects title if not create new project */
     const projectExists = PM.projects.some((project) => project.title === newProject.title)
@@ -63,6 +60,7 @@ const updateUI = (e) => {
                 const newTask = createTask()
                 // Add new task to current project
                 project.addTask(newTask)
+
                 // Create elements to display logic
                 const taskDiv = document.createElement("div")
                 const projectTask = document.createElement("project")

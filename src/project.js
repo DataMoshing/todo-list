@@ -2,10 +2,12 @@ import { v4 as uuidv4 } from "uuid";
 
 // Project Manager object
 const PM = {
-    projects: [],
+    // Get project string and convert to object or set to empty array
+    projects: JSON.parse(localStorage.getItem("projects")) || [],
     addProject(project) {
         this.projects.push(project)
-        // console.log(this.projects)
+        // Set key to projects and give string value of project
+        localStorage.setItem("projects", JSON.stringify(this.projects))
     },
     deleteProject(project) {
         const projectIndex = this.projects.indexOf(project)
@@ -50,10 +52,5 @@ const projectFactory = (title) => ({
         Object.assign(this.tasks.find(el => el.id === taskId), data)
     }
 })
-
-// const project1 = projectFactory("Clean")
-
-// PM.addProject(project1)
-// console.log(PM.projects[0])
 
 export { projectFactory, PM }
