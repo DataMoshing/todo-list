@@ -84,11 +84,6 @@ input[type="submit"] {
     flex-direction: column;
 }
 
-#task-priority::before {
-    border: none;
-
-}
-
 .task-form {
     display: flex;
     flex-direction: column;
@@ -194,7 +189,7 @@ input[type="submit"]:active,
 .edit-task-btn,
 .edit-priority-btn,
 .edit-due-date-btn {
-    width: 95px;
+    width: 100px;
 }
 
 .new-due-date,
