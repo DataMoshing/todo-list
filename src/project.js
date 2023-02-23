@@ -1,13 +1,9 @@
 import { v4 as uuidv4 } from "uuid";
 
-// Project Manager object
 const PM = {
-    // Get project string and convert to object or set to empty array
-    projects: JSON.parse(localStorage.getItem("projects")) || [],
+    projects: [],
     addProject(project) {
         this.projects.push(project)
-        // Set key to projects and give string value of project
-        localStorage.setItem("projects", JSON.stringify(this.projects))
     },
     deleteProject(project) {
         const projectIndex = this.projects.indexOf(project)
