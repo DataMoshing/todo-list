@@ -19,10 +19,13 @@ const createTask = () => {
 
 const createProject = () => {
     const projectInput = document.getElementById("project").value
+    if (projectInput === "") {
+        return alert("Project name can't be empty")
+    }
     const newProject = projectFactory(projectInput)
     return newProject
-
 }
+
 const updateUI = (e) => {
     e.preventDefault()
     const newProject = createProject()
@@ -43,6 +46,7 @@ const updateUI = (e) => {
 
             projectDiv.className = "project-div"
             projectContainer.className = "project-container"
+
             addTaskBtn.className = "add-project-task"
             addTaskBtn.textContent = "Add Task"
             deleteProjectBtn.textContent = "Delete"
@@ -52,15 +56,15 @@ const updateUI = (e) => {
             projectList.append(projectContainer)
             projectContainer.append(addTaskBtn, deleteProjectBtn)
 
-            console.log(PM.projects)
 
             addTaskBtn.addEventListener("click", (event) => {
                 event.preventDefault()
                 // Set variable to createTask function (taskFactory)
                 const newTask = createTask()
+                console.log(newTask)
                 // Add new task to current project
+                console.log(project)
                 project.addTask(newTask)
-
                 // Create elements to display logic
                 const taskDiv = document.createElement("div")
                 const projectTask = document.createElement("project")
@@ -188,4 +192,7 @@ const updateUI = (e) => {
     }
 }
 
+
 projectValue.addEventListener("click", updateUI);
+
+export default updateUI
