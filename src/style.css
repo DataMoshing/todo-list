@@ -2,7 +2,7 @@
 
 * {
     margin: 0;
-    padding: 0;
+    /* padding: 0; */
     box-sizing: border-box;
     text-decoration: none;
     list-style: none;
@@ -11,7 +11,7 @@
 body {
     display: flex;
     font-family: 'Inter Tight', sans-serif;
-    font-size: 18px;
+    font-size: 20px;
 }
 
 main {
@@ -20,7 +20,10 @@ main {
 }
 
 h1 {
+    display: flex;
     font-weight: 100;
+    background-color: rgba(207, 207, 207, 0.582);
+    width: 200px;
 }
 
 header {
@@ -35,7 +38,8 @@ header {
 }
 
 .project-input,
-.project-div {
+.project-div,
+input[type="submit"] {
     display: flex;
     align-items: center;
     width: 300px;
@@ -44,11 +48,10 @@ header {
 
 .project-input {
     margin-bottom: .5rem;
+    gap: 10px;
 }
 
 .task-input>label {
-    /* display: flex;
-    flex-wrap: wrap; */
     min-width: 500px
 }
 
@@ -77,8 +80,13 @@ header {
 
 .project-form {
     display: flex;
-    flex-direction: column;
     margin-bottom: 2rem;
+    flex-direction: column;
+}
+
+#task-priority::before {
+    border: none;
+
 }
 
 .task-form {
@@ -88,9 +96,25 @@ header {
 
 input[name="project"],
 input[name="title"],
-input[type="submit"] {
+input[type="text"] {
+    border: none;
+    background-color: #d6d6d6d7;
     width: 150px;
     margin-left: .5rem;
+    border-radius: 0.5rem;
+    height: 1.3rem;
+    padding-bottom: 0.1rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+input[type="date"],
+select {
+    background-color: #d6d6d6d7;
+    padding: 5px;
+    color: rgba(0, 0, 0, 0.747);
+    border: none;
+    border-radius: 1.5rem;
 }
 
 .task-list,
@@ -131,6 +155,8 @@ input[type="submit"] {
 input[type="submit"],
 .add-project-task,
 .delete-project {
+    display: flex;
+    justify-content: center;
     background-color: transparent;
     border: 2px solid #1A1A1A;
     border-radius: 10px;
@@ -139,7 +165,7 @@ input[type="submit"],
     font-weight: 600;
     line-height: normal;
     min-height: 25px;
-    min-width: 100px;
+    min-width: 115px;
     outline: none;
     transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
     user-select: none;
@@ -168,7 +194,7 @@ input[type="submit"]:active,
 .edit-task-btn,
 .edit-priority-btn,
 .edit-due-date-btn {
-    width: 90px;
+    width: 95px;
 }
 
 .new-due-date,
