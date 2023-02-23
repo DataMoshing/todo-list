@@ -19,9 +19,6 @@ const createTask = () => {
 
 const createProject = () => {
     const projectInput = document.getElementById("project").value
-    if (projectInput === "") {
-        return alert("Project name can't be empty")
-    }
     const newProject = projectFactory(projectInput)
     return newProject
 }
@@ -29,6 +26,9 @@ const createProject = () => {
 const updateUI = (e) => {
     e.preventDefault()
     const newProject = createProject()
+    if (newProject.title === "") {
+        return alert("Project name can't be empty")
+    }
     /* Iterate through each project in array and check if current project title is equal to new projects title if not create new project */
     const projectExists = PM.projects.some((project) => project.title === newProject.title)
     if (!projectExists) {
@@ -190,7 +190,9 @@ const updateUI = (e) => {
             })
         })
     }
+    return false
 }
+
 
 
 projectValue.addEventListener("click", updateUI);
