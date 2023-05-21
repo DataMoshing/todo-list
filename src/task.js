@@ -4,6 +4,7 @@ const taskFactory = (title, dueDate, priority) => ({ title, dueDate, priority, i
 
 const createTask = (title, dueDate, priority) => {
     const task = taskFactory(title, dueDate, priority)
+    localStorage.setItem("tasks", JSON.stringify(task));
     return task
 }
 
