@@ -12,21 +12,27 @@ const createTask = () => {
     const taskTitle = document.getElementById("task-title").value;
     const taskDuedate = document.getElementById("due-date").value;
     const taskPriority = document.getElementById("task-priority").value;
+    // Create new task object using task factory function.
     const newTask = taskFactory(taskTitle, taskDuedate, taskPriority);
     return newTask;
 };
 
+// Create new project object.
 const createProject = () => {
     const projectInput = document.getElementById("project").value;
+    // If project input is empty return .
     if (projectInput === "") {
         return null;
     }
+    // Create new project object using project factory function.
     const newProject = projectFactory(projectInput);
     return newProject;
 };
 
 const renderProjects = () => {
+    // Clear project container
     projectList.textContent = "";
+    // Loop through each project in PM projects array
     PM.projects.forEach((project) => {
         const projectContainer = document.createElement("div");
         const projectDiv = document.createElement("h3");
@@ -96,6 +102,7 @@ const renderProjects = () => {
             addTaskBtn.remove();
             deleteProjectBtn.remove();
             const projectTasks = document.querySelectorAll(".task-div");
+            // Loop through tasks and remove tasks associated with project from DOM.
             projectTasks.forEach((taskDiv) => {
                 if (taskDiv.textContent.includes(project.title)) {
                     taskDiv.remove();
@@ -107,13 +114,17 @@ const renderProjects = () => {
 
 document.addEventListener("DOMContentLoaded", renderProjects);
 
+// Update UI with new projects.
 const updateUI = (e) => {
     e.preventDefault();
     const newProject = createProject();
+    // If project title is empty return.
     if (!newProject) {
         return;
     }
+    // Check if project with the same title already exists.
     const projectExists = PM.projects.some((project) => project.title === newProject.title);
+    // If project doesn't exist add to PM project array and render project.
     if (!projectExists) {
         PM.addProject(newProject);
         renderProjects();

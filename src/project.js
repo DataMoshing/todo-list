@@ -2,15 +2,16 @@ import { v4 as uuidv4 } from "uuid";
 
 const PM = {
     projects: [],
+    // Get projects from local storage, if project found parse project and assign to projects property.
     localStorage() {
         const storedProjects = localStorage.getItem("projects");
         if (storedProjects) {
             this.projects = JSON.parse(storedProjects);
         }
     },
-
     addProject(project) {
         this.projects.push(project);
+        // Update local storage
         localStorage.setItem("projects", JSON.stringify(this.projects));
     },
 
@@ -38,6 +39,7 @@ const PM = {
         }
         return false;
     },
+    // Update local storage by stringifying current projects array and store under key "projects".
     updateLocalStorage() {
         localStorage.setItem("projects", JSON.stringify(this.projects));
     }
@@ -66,6 +68,7 @@ const projectFactory = (title) => ({
     }
 });
 
+// Call the localStorage function to retrieve projects from local storag
 PM.localStorage();
 
 export { projectFactory, PM }
