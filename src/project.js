@@ -68,7 +68,7 @@ const projectFactory = (title) => ({
     }
 });
 
-// Call the localStorage function to retrieve projects from local storag
+// Call the localStorage function to retrieve projects from local storage.
 PM.localStorage();
 
 export { projectFactory, PM }
