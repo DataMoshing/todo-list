@@ -47,6 +47,9 @@ const projectFactory = (title) => ({
     updateTask(taskId, data) {
         Object.assign(this.tasks.find(el => el.id === taskId), data)
     }
-})
+});
+
+// Call the localStorage function to retrieve projects from local storage.
+PM.localStorage();
 
 export { projectFactory, PM }
