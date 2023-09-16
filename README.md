@@ -17,3 +17,5 @@ Todo list app built with HTML, CSS, and JS.
 A functional to-do list application that can add projects and add tasks to those projects. Although functioning it is missing localStorage, so I could not implement it.
 A feature that would be nice to add later on would be editing the project title along with fixing the date format yyyy/mm/dd to mm/dd/yyyy. UI can also use a bit of work,
 more color to make it pop more.
+
+[Live demo](https://datamoshing.github.io/todo-list/)
